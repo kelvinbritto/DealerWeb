@@ -16,4 +16,5 @@ A poker dealer is the name that defines the person who delivers the cards to pla
 ## Comments
 
 The project was done using Java v1.8 and Spring Boot
+
 ---
