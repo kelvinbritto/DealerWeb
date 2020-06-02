@@ -1,0 +1,222 @@
+body {
+	background: #000000;
+}
+
+#logo {
+	position: relative;
+	width: 25%;
+	left: 10%;
+	top: -20px;
+}
+
+.titulo {
+	position: absolute;
+	top: 10%;
+	right: 50%;
+	color: white;
+	font-size: 35px;
+	text-align: center;
+}
+
+.sub-titulo {
+	position: absolute;
+	top: 20%;
+	right: 52%;
+	color: white;
+	font-size: 35px;
+	text-align: center;
+}
+
+form {
+	margin: 27px 0;
+}
+
+main {
+	width: 940px;
+	margin: 0 auto;
+}
+
+form label, form p, form legend {
+	color: white;
+	display: block;
+	font-size: 20px;
+	margin: 0 0 10px;
+	color: white;
+}
+
+.input-nome {
+	display: inline-block;
+	margin: 0px 0 20px;
+	padding: 5px 25px;
+	width: 80%;
+}
+
+.input-padrao {
+	display: inline-block;
+	margin: 0px 0 20px;
+	padding: 5px 25px;
+	width: 100%;
+}
+
+.jogador-tabela {
+	color: white;
+	font-size: 23px;
+	margin: 20px 0 40px;
+	display: inline-block;
+	position: absolute;
+	top: 35%;
+	left: 55%;
+}
+
+.enviar {
+	width: 100%;
+	padding: 15px 0;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.enviar:hover {
+	background: darkgreen;
+}
+
+.botao-flop {
+	font-size: 18px;
+	border: none;
+	width: 100%;
+	padding: 6px 50px;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.botao-turn {
+	font-size: 18px;
+	border: none;
+	width: 100%;
+	padding: 6px 50px;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.botao-river {
+	font-size: 18px;
+	border: none;
+	width: 100%;
+	padding: 6px 50px;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.botao-flop:hover {
+	background: darkgreen;
+}
+
+.botao-turn:hover {
+	background: darkgreen;
+}
+
+.botao-river:hover {
+	background: darkgreen;
+}
+
+.form2 {
+	margin: 100px 80px 30px;
+	display: inline-block;
+}
+
+.tabela-resultado {
+	position: absolute;
+	top: 34%;
+	left: 29%;
+}
+
+.resultado {
+	display: block;
+}
+
+.botao-resultado {
+	width: 100%;
+	padding: 15px 0;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.botao-resultado:hover {
+	background: darkgreen;
+}
+
+.carta-resultado {
+	color: white;
+	text-align: center;
+}
+
+.novo-jogo {
+	width: 100%;
+	padding: 15px 0;
+	background: #CCCCCC;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	border: none;
+	border-radius: 5px;
+	transition: 1s all;
+	cursor: pointer;
+}
+
+.novo-jogo:hover {
+	background: darkred;
+}
+
+.tabelajogador {
+    position: relative;
+    text-align: center;
+    left: -2%;
+    width: 940px;
+    top: 85px;
+}
+
+.cardjogador{
+	padding: 10px 10px 0px 20px;
+}
+
+.jogador {
+	color: white;
+    display: inline-block;
+    padding: 0px 10px;
+    font-size: 18px;
+}
+
+.novo-jogo-form {
+	position: relative;
+	top: 180px;
+}
+
+
+
+.carta {
+	font-size: 22px;
+	padding: 0 10px;
+}
