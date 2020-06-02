@@ -8,10 +8,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @SpringBootApplication
-public class DealerWebSpringBootApplication implements WebMvcConfigurer {
+public class DealerWebApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DealerWebSpringBootApplication.class, args);
+		SpringApplication.run(DealerWebApplication.class, args);
 	}
 
 	@Override
