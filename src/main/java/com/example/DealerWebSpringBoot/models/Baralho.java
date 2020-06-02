@@ -7,9 +7,8 @@ import java.util.Random;
 
 public class Baralho {
 
-	private static ArrayList<Carta> cartas;
-	private static ArrayList<Carta> cartasBaralhoFixo;
-	private static ArrayList<Carta> playerCarta;
+	private ArrayList<Carta> cartas;
+	private ArrayList<Carta> cartasBaralhoFixo;
 
 	public Baralho() {
 		cartas = new ArrayList<>();
@@ -17,23 +16,22 @@ public class Baralho {
 		iniciarBaralho();
 	}
 
-	private static void iniciarBaralho() {
-		int id = 1;
+	private void iniciarBaralho() {
 
+		int id = 1;
 		String numeros[] = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 		String naipe[] = { "Espadas", "Copas", "Ouros", "Paus" };
-		//String naipe[] = { "&spades;", "&hearts;", "&diams;", "&clubs;" };
-		
+		// String naipe[] = { "&spades;", "&hearts;", "&diams;", "&clubs;" };
+
 		for (int nai = 0; nai < naipe.length; nai++) {
 			for (int num = 0; num < numeros.length; num++) {
 				addCarta(id, numeros[num], naipe[nai]);
 				id++;
 			}
-
 		}
 	}
 
-	public static void addCarta(int id, String numero, String naipe) {
+	public void addCarta(int id, String numero, String naipe) {
 		Carta novaCarta = new Carta(id, numero, naipe);
 		cartas.add(novaCarta);
 		cartasBaralhoFixo.add(novaCarta);
@@ -90,7 +88,7 @@ public class Baralho {
 
 			if (carta.getId() == id) {
 				Carta card = carta;
-				//removeCarta(carta.getNumero(), carta.getNaipe());
+				// removeCarta(carta.getNumero(), carta.getNaipe());
 				return card;
 			}
 		}
@@ -122,16 +120,6 @@ public class Baralho {
 		}
 	}
 
-	public String cartaAleatoria() {
-		Random r = new Random();
-		int a = r.nextInt(quantidade());
-		String numeroCarta = cartas.get(a).getNumero();
-		String naipeCarta = cartas.get(a).getNaipe();
-		String nvc = cartas.get(a).getNome();
-		removeCarta(numeroCarta, naipeCarta);
-		return nvc;
-	}
-
 	public Carta AleatoriaCarta() {
 		Random r = new Random();
 		int a = r.nextInt(quantidade());
@@ -146,13 +134,8 @@ public class Baralho {
 		return cartas.size();
 	}
 
-	public void gravaCarta(Carta carta) {
-		System.out.println(carta);
-		playerCarta.add(carta);
-	}
-	
-	public Boolean TestaIguais(Carta carta1, Carta carta2) {
-		if(carta1 != carta2) {
+	public Boolean testaIguais(Carta carta1, Carta carta2) {
+		if (carta1 != carta2) {
 			return false;
 		}
 		return true;

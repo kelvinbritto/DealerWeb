@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.DealerWebSpringBoot.models.Baralho;
 import com.example.DealerWebSpringBoot.models.Carta;
 import com.example.DealerWebSpringBoot.models.Mesa;
 import com.example.DealerWebSpringBoot.models.Player;
@@ -17,7 +16,6 @@ import com.example.DealerWebSpringBoot.models.Player;
 @Controller
 public class MesaController {
 
-	private Baralho baralho = new Baralho();
 	private Mesa mesa = new Mesa();
 
 	@GetMapping
@@ -61,7 +59,7 @@ public class MesaController {
 	public ModelAndView resultado() {
 
 		if (mesa.getValidaEntregaResultado()) {
-
+			
 			ModelAndView modelAndView = new ModelAndView("resultado");
 
 			mesa.geraResultado();
@@ -80,7 +78,7 @@ public class MesaController {
 	@RequestMapping("/formulario")
 	public ModelAndView novo() {
 		ModelAndView modelAndView = new ModelAndView("/formularioescolhacartas");
-		List<Carta> cartasBaralho = baralho.listaBaralhoFixo();
+		List<Carta> cartasBaralho = mesa.listarBaralho();
 		modelAndView.addObject("cartasBaralho", cartasBaralho);
 		modelAndView.addObject("jogadores", mesa.getPlayers());
 		return modelAndView;
@@ -89,15 +87,15 @@ public class MesaController {
 	@RequestMapping(value = "/grava", method = RequestMethod.POST)
 	public ModelAndView grava(String nome, Integer carta1, Integer carta2) {
 
-		Carta cartaEscolida1 = baralho.selecionaCartaId(carta1);
-		Carta cartaEscolida2 = baralho.selecionaCartaId(carta2);
+		Carta cartaEscolida1 = mesa.selecionaCartaId(carta1);
+		Carta cartaEscolida2 = mesa.selecionaCartaId(carta2);
 
-		if (baralho.TestaIguais(cartaEscolida1, cartaEscolida2) || cartaEscolida1 == null || cartaEscolida2 == null) {
+		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) || cartaEscolida1 == null || cartaEscolida2 == null) {
 			return new ModelAndView("redirect:/mesa/formulario");
 		}
 
-		baralho.removeCarta(cartaEscolida1);
-		baralho.removeCarta(cartaEscolida2);
+		mesa.removeCarta(cartaEscolida1);
+		mesa.removeCarta(cartaEscolida2);
 
 		Player player = new Player(nome, cartaEscolida1, cartaEscolida2);
 
@@ -108,7 +106,6 @@ public class MesaController {
 
 	@RequestMapping("/resetajogo")
 	public ModelAndView resetajogo() {
-		this.baralho = new Baralho();
 		this.mesa = new Mesa();
 		return new ModelAndView("redirect:/mesa/formulario");
 	}

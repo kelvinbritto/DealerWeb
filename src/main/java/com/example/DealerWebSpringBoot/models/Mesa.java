@@ -46,19 +46,13 @@ public class Mesa {
 		river = true;
 
 		cartasComunitarias.add(baralho.AleatoriaCarta());
-		
+
 		return cartasComunitarias;
 	}
-	
+
 	public void geraResultado() {
-		
 		Validadora validadora = new Validadora();
-		
-		for (Player player : jogadores) {
-			player.setResultado(validadora.valida(player, cartasComunitarias));
-		}
-		
-		
+		jogadores.forEach(player -> player.setResultado(validadora.valida(player, cartasComunitarias)));
 	}
 
 	public Carta getCarta1() {
@@ -103,13 +97,32 @@ public class Mesa {
 		cartasComunitarias.add(baralho.selecionaCartaId(13));
 		cartasComunitarias.add(baralho.selecionaCartaId(50));
 
-		turn = true;
 		flop = true;
+		turn = true;
 		river = true;
 	}
 
 	public List<Carta> getComunitarias() {
 		return cartasComunitarias;
 	}
-
+	
+	public List<Carta> listarBaralho() {
+		return baralho.listaBaralhoFixo();
+	}
+	
+	public Carta selecionaCartaId(Integer cartaId) {
+		return baralho.selecionaCartaId(cartaId);
+	}
+	
+	public void removeCarta(Carta carta) {
+		baralho.removeCarta(carta);
+	}
+	
+	public Boolean testaIguais(Carta carta1, Carta carta2) {
+		return baralho.testaIguais(carta1, carta2);
+	}
+	
+	public Carta aleatoriaCarta() {
+		return baralho.AleatoriaCarta();
+	}
 }

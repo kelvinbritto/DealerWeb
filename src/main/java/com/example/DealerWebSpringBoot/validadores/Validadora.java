@@ -21,36 +21,36 @@ public class Validadora {
 	public String valida(Player player, List<Carta> cartasComunitarias) {
 		
 		if(royal.temUmRoyal(player, cartasComunitarias)) {
-			return "Royal Flush : (10)";
+			return "Royal Flush";
 		}
 		if(straightFlush.temUmStraightFlush(player, cartasComunitarias)) {
-			return "Straight Flush : (9)";
+			return "Straight Flush";
 		}
 		if(fourOfAKind.temUmFourOfAKind(player, cartasComunitarias)) {
-			return "Four Of A Kind : (8)";
+			return "Four Of A Kind";
 		}
 		if(fullHouse.temUmFullHouse(player, cartasComunitarias)) {
-			return "Full House : (7)";
+			return "Full House";
 		}
 		if(flush.temUmFlush(player, cartasComunitarias)) {
-			return "Flush : (6)";
+			return "Flush";
 		}
 		if(straight.ehUmaSequencia(player, cartasComunitarias)) {
-			return "Straight : (5)";
+			return "Straight";
 		}
 		if(trinca.temUmaTrinca(player, cartasComunitarias)) {
-			return "Trinca : (4)";
+			return "Trinca";
 		}
 		if(doisPares.temDoisPares(player, cartasComunitarias)) {
-			return "Dois Pares : (3)";
+			return "Dois Pares";
 		}
 		if(par.temUmPar(player, cartasComunitarias)) {
-			return "Um Par : (2) ";
+			return "Um Par";
 		}
 		if(cartaAlta.temUmaCartaAlta(player, cartasComunitarias)) {
-			return "Carta Alta : (1)";
+			return "Carta Alta";
 		}
-		return "Nada! : (0)";
+		return "Nada!";
 	}
 
 }
