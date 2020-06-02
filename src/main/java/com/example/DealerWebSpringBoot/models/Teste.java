@@ -5,32 +5,36 @@ import com.example.DealerWebSpringBoot.validadores.Validadora;
 public class Teste {
 
 	public static void main(String[] args) {
-		Baralho baralho = new Baralho();
-		Mesa mesa = new Mesa();
-		int i = 0;
-		
-		while(i < 100000) {
-		
-		mesa = new Mesa();
-		
-		Player player = new Player("Kelvin", baralho.AleatoriaCarta(), baralho.AleatoriaCarta());
+
+		boolean valida = false;
 		Validadora validadora = new Validadora();
-		
-		mesa.flop();
-		mesa.turn();
-		mesa.river();
-		
-		System.out.println(player.getCarta1() + " " + player.getCarta2());
-		System.out.println(mesa.getCarta1());
-		System.out.println(mesa.getCarta2());
-		System.out.println(mesa.getCarta3());
-		System.out.println(mesa.getCarta4());
-		System.out.println(mesa.getCarta5());
-		System.out.println("");
-		System.out.println(validadora.valida(player, mesa.getComunitarias()));
-		
-		i++;
+		int i = 0;
+		while (valida == false) {
+
+			Mesa mesa = new Mesa();
+
+			Player player = new Player("Kelvin", mesa.aleatoriaCarta(), mesa.aleatoriaCarta());
+
+			mesa.gravarPlayer(player);
+
+			mesa.flop();
+			mesa.turn();
+			mesa.river();
+
+			if (validadora.valida(player, mesa.getComunitarias()) != "Royal Flush") {
+				valida = false;
+				i++;
+				System.out.println(i);
+			} else {
+
+				System.out.println(mesa.getPlayers().get(0).getCarta1().getNome() + " "
+						+ mesa.getPlayers().get(0).getCarta2().getNome());
+
+				mesa.getComunitarias().forEach(carta -> System.out.println(carta));
+				valida = true;
+
+			}
 		}
-		
+
 	}
 }
