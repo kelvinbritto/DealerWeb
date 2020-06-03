@@ -20,6 +20,7 @@
 		</div>
 	</header>
 	<main>
+		<h1 class="title">Seleciona Comunitárias</h1>
 		<form method="POST" action="/mesa/gravarcomunitarias">
 			<p>Primeira Carta:</p>
 			<select name="carta1" class="input-comunitaria">

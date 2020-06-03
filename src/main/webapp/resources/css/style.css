@@ -221,7 +221,14 @@ form label, form p, form legend {
 	top: 180px;
 }
 
-
+.title {
+	position: relative;
+    color: white;
+    top: -100px;
+    left: 30%;
+    font-weight: bold;
+    font-size: 30px;
+}
 
 .carta {
 	font-size: 22px;
