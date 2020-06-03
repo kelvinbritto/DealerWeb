@@ -13,7 +13,42 @@ public class Mesa {
 
 	private List<Player> jogadores = new ArrayList<Player>();
 	private List<Carta> cartasComunitarias = new ArrayList<Carta>();
+
 	private Baralho baralho = new Baralho();
+
+	public List<Carta> comunitariasManual(Carta carta1, Carta carta2, Carta carta3, Carta carta4, Carta carta5) {
+
+		if (baralho.listaBaralho().contains(carta1)) {
+			cartasComunitarias.add(carta1);
+			baralho.removeCarta(carta1);
+		}
+		if (baralho.listaBaralho().contains(carta2)) {
+			cartasComunitarias.add(carta2);
+			baralho.removeCarta(carta2);
+		}
+		if (baralho.listaBaralho().contains(carta3)) {
+			cartasComunitarias.add(carta3);
+			baralho.removeCarta(carta3);
+		}
+		if (baralho.listaBaralho().contains(carta4)) {
+			cartasComunitarias.add(carta4);
+			baralho.removeCarta(carta4);
+		}
+		if (baralho.listaBaralho().contains(carta5)) {
+			cartasComunitarias.add(carta5);
+			baralho.removeCarta(carta5);
+		}
+		
+		if(cartasComunitarias.size() != 5) {
+			return null;
+		}
+
+		flop = true;
+		turn = true;
+		river = true;
+		
+		return getComunitarias();
+	}
 
 	public List<Carta> flop() {
 
@@ -21,9 +56,9 @@ public class Mesa {
 			return cartasComunitarias;
 		}
 		flop = true;
-		cartasComunitarias.add(baralho.AleatoriaCarta());
-		cartasComunitarias.add(baralho.AleatoriaCarta());
-		cartasComunitarias.add(baralho.AleatoriaCarta());
+		cartasComunitarias.add(baralho.cartaAleatoria());
+		cartasComunitarias.add(baralho.cartaAleatoria());
+		cartasComunitarias.add(baralho.cartaAleatoria());
 
 		return cartasComunitarias;
 	}
@@ -34,7 +69,7 @@ public class Mesa {
 			return cartasComunitarias;
 		}
 		turn = true;
-		cartasComunitarias.add(baralho.AleatoriaCarta());
+		cartasComunitarias.add(baralho.cartaAleatoria());
 
 		return cartasComunitarias;
 	}
@@ -45,7 +80,7 @@ public class Mesa {
 		}
 		river = true;
 
-		cartasComunitarias.add(baralho.AleatoriaCarta());
+		cartasComunitarias.add(baralho.cartaAleatoria());
 
 		return cartasComunitarias;
 	}
@@ -103,26 +138,29 @@ public class Mesa {
 	}
 
 	public List<Carta> getComunitarias() {
-		return cartasComunitarias;
+		List<Carta> cartas = new ArrayList<Carta>();
+		cartas.addAll(cartasComunitarias);
+		return cartas;
 	}
-	
+
 	public List<Carta> listarBaralho() {
 		return baralho.listaBaralhoFixo();
 	}
-	
+
 	public Carta selecionaCartaId(Integer cartaId) {
 		return baralho.selecionaCartaId(cartaId);
 	}
-	
+
 	public void removeCarta(Carta carta) {
 		baralho.removeCarta(carta);
 	}
-	
+
 	public Boolean testaIguais(Carta carta1, Carta carta2) {
 		return baralho.testaIguais(carta1, carta2);
 	}
-	
-	public Carta aleatoriaCarta() {
-		return baralho.AleatoriaCarta();
+
+	public Carta cartaAleatoria() {
+		return baralho.cartaAleatoria();
 	}
+
 }

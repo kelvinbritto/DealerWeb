@@ -120,7 +120,7 @@ public class Baralho {
 		}
 	}
 
-	public Carta AleatoriaCarta() {
+	public Carta cartaAleatoria() {
 		Random r = new Random();
 		int a = r.nextInt(quantidade());
 		String numeroCarta = cartas.get(a).getNumero();
