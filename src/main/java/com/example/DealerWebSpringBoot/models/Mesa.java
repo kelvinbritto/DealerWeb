@@ -16,8 +16,14 @@ public class Mesa {
 
 	private Baralho baralho = new Baralho();
 
-	public List<Carta> comunitariasManual(Carta carta1, Carta carta2, Carta carta3, Carta carta4, Carta carta5) {
-
+	public List<Carta> comunitariasManual(Integer cartaId1, Integer cartaId2, Integer cartaId3, Integer cartaId4, Integer cartaId5) {
+		
+		Carta carta1 = selecionaCartaId(cartaId1);
+		Carta carta2 = selecionaCartaId(cartaId2);
+		Carta carta3 = selecionaCartaId(cartaId3);
+		Carta carta4 = selecionaCartaId(cartaId4);
+		Carta carta5 = selecionaCartaId(cartaId5);
+		
 		if (baralho.listaBaralho().contains(carta1)) {
 			cartasComunitarias.add(carta1);
 			baralho.removeCarta(carta1);

@@ -58,6 +58,13 @@ form label, form p, form legend {
 	width: 100%;
 }
 
+.input-comunitaria {
+	display: inline-block;
+	margin: 0px 0 20px;
+	padding: 5px 25px;
+	width: 20%;
+}
+
 .jogador-tabela {
 	color: white;
 	font-size: 23px;

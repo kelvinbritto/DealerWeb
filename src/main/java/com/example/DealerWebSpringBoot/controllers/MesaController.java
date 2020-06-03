@@ -104,7 +104,6 @@ public class MesaController {
 		return new ModelAndView("redirect:/mesa/formulario");
 	}
 
-	
 	@RequestMapping("/formcomunitarias")
 	public ModelAndView comunitarias() {
 		ModelAndView modelAndView = new ModelAndView("formcomunitarias");
@@ -112,22 +111,15 @@ public class MesaController {
 		modelAndView.addObject("cartasBaralho", cartasBaralho);
 		return modelAndView;
 	}
-	
-	
+
 	@RequestMapping(value = "/gravarcomunitarias", method = RequestMethod.POST)
-	public ModelAndView selecionaComunitarias(Integer carta1, Integer carta2, Integer carta3, Integer carta4, Integer carta5) {
+	public ModelAndView selecionaComunitarias(Integer carta1, Integer carta2, Integer carta3, Integer carta4,
+			Integer carta5) {
 
-		Carta cartaEscolida1 = mesa.selecionaCartaId(carta1);
-		Carta cartaEscolida2 = mesa.selecionaCartaId(carta2);
-		Carta cartaEscolida3 = mesa.selecionaCartaId(carta3);
-		Carta cartaEscolida4 = mesa.selecionaCartaId(carta4);
-		Carta cartaEscolida5 = mesa.selecionaCartaId(carta5);
-
-		if(mesa.comunitariasManual(cartaEscolida1, cartaEscolida2, cartaEscolida3, 
-				cartaEscolida4, cartaEscolida5) != null) {
-			return new ModelAndView("redirect:/mesa/resultado");			
+		if (mesa.comunitariasManual(carta1, carta2, carta3, carta4, carta5) != null) {
+			return new ModelAndView("redirect:/mesa/resultado");
 		}
-			return new ModelAndView("redirect:/mesa/formcomunitarias");
+		return new ModelAndView("redirect:/mesa/formcomunitarias");
 	}
 
 	@RequestMapping("/resetajogo")
