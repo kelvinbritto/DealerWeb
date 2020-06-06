@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Baralho {
 
-	private ArrayList<Carta> cartas;
-	private ArrayList<Carta> cartasBaralhoFixo;
+	private List<Carta> cartas;
+	private List<Carta> cartasBaralhoFixo;
 
 	public Baralho() {
 		cartas = new ArrayList<>();

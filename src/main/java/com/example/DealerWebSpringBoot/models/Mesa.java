@@ -16,44 +16,36 @@ public class Mesa {
 
 	private Baralho baralho = new Baralho();
 
-	public List<Carta> comunitariasManual(Integer cartaId1, Integer cartaId2, Integer cartaId3, Integer cartaId4, Integer cartaId5) {
-		
+	public List<Carta> comunitariasManual(Integer cartaId1, Integer cartaId2, Integer cartaId3, Integer cartaId4,
+			Integer cartaId5) {
+
 		Carta carta1 = selecionaCartaId(cartaId1);
 		Carta carta2 = selecionaCartaId(cartaId2);
 		Carta carta3 = selecionaCartaId(cartaId3);
 		Carta carta4 = selecionaCartaId(cartaId4);
 		Carta carta5 = selecionaCartaId(cartaId5);
-		
-		if (baralho.listaBaralho().contains(carta1)) {
-			cartasComunitarias.add(carta1);
-			baralho.removeCarta(carta1);
-		}
-		if (baralho.listaBaralho().contains(carta2)) {
-			cartasComunitarias.add(carta2);
-			baralho.removeCarta(carta2);
-		}
-		if (baralho.listaBaralho().contains(carta3)) {
-			cartasComunitarias.add(carta3);
-			baralho.removeCarta(carta3);
-		}
-		if (baralho.listaBaralho().contains(carta4)) {
-			cartasComunitarias.add(carta4);
-			baralho.removeCarta(carta4);
-		}
-		if (baralho.listaBaralho().contains(carta5)) {
-			cartasComunitarias.add(carta5);
-			baralho.removeCarta(carta5);
-		}
-		
-		if(cartasComunitarias.size() != 5) {
-			return null;
-		}
 
-		flop = true;
-		turn = true;
-		river = true;
-		
-		return getComunitarias();
+		if (baralho.listaBaralho().contains(carta1) && baralho.listaBaralho().contains(carta2)
+				&& baralho.listaBaralho().contains(carta3) && baralho.listaBaralho().contains(carta4)
+				&& baralho.listaBaralho().contains(carta5)) {
+			cartasComunitarias.add(carta1);
+			cartasComunitarias.add(carta2);
+			cartasComunitarias.add(carta3);
+			cartasComunitarias.add(carta4);
+			cartasComunitarias.add(carta5);
+			baralho.removeCarta(carta1);
+			baralho.removeCarta(carta2);
+			baralho.removeCarta(carta3);
+			baralho.removeCarta(carta4);
+			baralho.removeCarta(carta5);
+
+			flop = true;
+			turn = true;
+			river = true;
+
+			return getComunitarias();
+		}
+		return null;
 	}
 
 	public List<Carta> flop() {
