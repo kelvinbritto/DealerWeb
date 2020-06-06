@@ -23,7 +23,7 @@
 	</header>
 	<main>
 		<h2 class="titulo">Selecione Suas Cartas</h2>
-		<h3 style="color:white;">${operacao}</h3>
+		<h3 style="color: white;">${operacao}</h3>
 		<form method="POST" action="/mesa/grava">
 			<table>
 				<tr>
@@ -38,8 +38,8 @@
 					<td>
 						<p>Primeira Carta:</p> <select name="carta1" class="input-padrao">
 							<option value="null">Sua Primeira Carta</option>
-							<c:forEach items="${cartasBaralho}" var="carta"> 
-								<option value="${carta.id}" >${carta.nome}</option>
+							<c:forEach items="${cartasBaralho}" var="carta">
+								<option value="${carta.id}">${carta.nome}</option>
 							</c:forEach>
 					</select>
 					</td>
@@ -68,7 +68,7 @@
 						<th style="padding: 6px 0;">Jogadores</th>
 					</tr>
 				</thead>
-				
+
 				<c:forEach items="${jogadores}" var="player">
 					<tr>
 						<td style="text-transform: uppercase; padding: 3px 0;">${player.nome}</td>
@@ -78,8 +78,13 @@
 		</div>
 
 		<form action="/mesa/">
-			<input type="submit" value="Começar o Jogo" class="enviar" />
+			<input type="submit" value="Começar o Jogo Automatico" class="enviar" />
 		</form>
+
+		<form action="/mesa/formcomunitarias">
+			<input type="submit" value="Selecionar Comunitarias" class="enviar" />
+		</form>
+
 	</main>
 </body>
 </html>

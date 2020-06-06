@@ -1,40 +1,27 @@
 package com.example.DealerWebSpringBoot.models;
 
+import java.util.List;
+
 import com.example.DealerWebSpringBoot.validadores.Validadora;
 
 public class Teste {
 
 	public static void main(String[] args) {
 
-		boolean valida = false;
+		Mesa mesa = new Mesa();
+
 		Validadora validadora = new Validadora();
-		int i = 0;
-		while (valida == false) {
 
-			Mesa mesa = new Mesa();
+		Player kelvin = new Player("Kelvin", mesa.selecionaCartaId(3), mesa.selecionaCartaId(4));
 
-			Player player = new Player("Kelvin", mesa.aleatoriaCarta(), mesa.aleatoriaCarta());
+		List<Carta> comunitarias = mesa.comunitariasManual(18, 19, 20, 21, 22);
 
-			mesa.gravarPlayer(player);
+		System.out.println(mesa.getComunitarias());
+		System.out.println(kelvin.getCarta1());
+		System.out.println(kelvin.getCarta2());
 
-			mesa.flop();
-			mesa.turn();
-			mesa.river();
-
-			if (validadora.valida(player, mesa.getComunitarias()) != "Royal Flush") {
-				valida = false;
-				i++;
-				System.out.println(i);
-			} else {
-
-				System.out.println(mesa.getPlayers().get(0).getCarta1().getNome() + " "
-						+ mesa.getPlayers().get(0).getCarta2().getNome());
-
-				mesa.getComunitarias().forEach(carta -> System.out.println(carta));
-				valida = true;
-
-			}
-		}
-
+		System.out.println(validadora.valida(kelvin, comunitarias));
+		
 	}
+
 }

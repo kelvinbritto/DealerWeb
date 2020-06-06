@@ -2,10 +2,12 @@ package com.example.DealerWebSpringBoot.controllers;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.DealerWebSpringBoot.models.Carta;
@@ -14,6 +16,7 @@ import com.example.DealerWebSpringBoot.models.Player;
 
 @RequestMapping("/mesa")
 @Controller
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class MesaController {
 
 	private Mesa mesa = new Mesa();
@@ -59,7 +62,7 @@ public class MesaController {
 	public ModelAndView resultado() {
 
 		if (mesa.getValidaEntregaResultado()) {
-			
+
 			ModelAndView modelAndView = new ModelAndView("resultado");
 
 			mesa.geraResultado();
@@ -77,7 +80,7 @@ public class MesaController {
 
 	@RequestMapping("/formulario")
 	public ModelAndView novo() {
-		ModelAndView modelAndView = new ModelAndView("/formularioescolhacartas");
+		ModelAndView modelAndView = new ModelAndView("/formplayer");
 		List<Carta> cartasBaralho = mesa.listarBaralho();
 		modelAndView.addObject("cartasBaralho", cartasBaralho);
 		modelAndView.addObject("jogadores", mesa.getPlayers());
@@ -90,7 +93,8 @@ public class MesaController {
 		Carta cartaEscolida1 = mesa.selecionaCartaId(carta1);
 		Carta cartaEscolida2 = mesa.selecionaCartaId(carta2);
 
-		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) || cartaEscolida1 == null || cartaEscolida2 == null) {
+		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) 
+				|| cartaEscolida1 == null || cartaEscolida2 == null) {
 			return new ModelAndView("redirect:/mesa/formulario");
 		}
 
@@ -102,6 +106,27 @@ public class MesaController {
 		mesa.gravarPlayer(player);
 
 		return new ModelAndView("redirect:/mesa/formulario");
+	}
+
+	@RequestMapping("/formcomunitarias")
+	public ModelAndView comunitarias() {
+		if(mesa.getPlayers().size() > 1) {
+			ModelAndView modelAndView = new ModelAndView("formcomunitarias");
+			List<Carta> cartasBaralho = mesa.listarBaralho();
+			modelAndView.addObject("cartasBaralho", cartasBaralho);
+			return modelAndView;			
+		}
+			return new ModelAndView("redirect:/mesa/formulario");
+	}
+
+	@RequestMapping(value = "/gravarcomunitarias", method = RequestMethod.POST)
+	public ModelAndView selecionaComunitarias(Integer carta1, Integer carta2, Integer carta3, Integer carta4,
+			Integer carta5) {
+
+		if (mesa.comunitariasManual(carta1, carta2, carta3, carta4, carta5) != null) {
+			return new ModelAndView("redirect:/mesa/resultado");
+		}
+		return new ModelAndView("redirect:/mesa/formcomunitarias");
 	}
 
 	@RequestMapping("/resetajogo")

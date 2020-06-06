@@ -104,52 +104,74 @@ public class StraightFlush {
 			Integer valorCart4 = suporte.calculaId(cartasSequencia.get(3));
 			Integer valorCart5 = suporte.calculaId(cartasSequencia.get(4));
 
+			Carta c1 = cartasSequencia.get(0);
+			Carta c2 = cartasSequencia.get(1);
+			Carta c3 = cartasSequencia.get(2);
+			Carta c4 = cartasSequencia.get(3);
+			Carta c5 = cartasSequencia.get(4);
+
 			if (cart1 == cart2 && cart2 == cart3 && cart3 == cart4 && cart4 == cart5 && ((valorCart1 + 1) == valorCart2)
 					&& ((valorCart2 + 1) == valorCart3) && ((valorCart3 + 1) == valorCart4)
 					&& (valorCart4 + 1) == valorCart5) {
-				return true;
+				if (suporte.temCartaPlayer(player, c1, c2, c3, c4, c5)) {
+					return true;
+				}
 			} else {
-				cart1 = cartasSequencia.get(0 + 1).getNaipe();
-				cart2 = cartasSequencia.get(1 + 1).getNaipe();
-				cart3 = cartasSequencia.get(2 + 1).getNaipe();
-				cart4 = cartasSequencia.get(3 + 1).getNaipe();
-				cart5 = cartasSequencia.get(4 + 1).getNaipe();
+				cart1 = cartasSequencia.get(1).getNaipe();
+				cart2 = cartasSequencia.get(2).getNaipe();
+				cart3 = cartasSequencia.get(3).getNaipe();
+				cart4 = cartasSequencia.get(4).getNaipe();
+				cart5 = cartasSequencia.get(5).getNaipe();
 
-				valorCart1 = suporte.calculaId(cartasSequencia.get(0 + 1));
-				valorCart2 = suporte.calculaId(cartasSequencia.get(1 + 1));
-				valorCart3 = suporte.calculaId(cartasSequencia.get(2 + 1));
-				valorCart4 = suporte.calculaId(cartasSequencia.get(3 + 1));
-				valorCart5 = suporte.calculaId(cartasSequencia.get(4 + 1));
+				valorCart1 = suporte.calculaId(cartasSequencia.get(1));
+				valorCart2 = suporte.calculaId(cartasSequencia.get(2));
+				valorCart3 = suporte.calculaId(cartasSequencia.get(3));
+				valorCart4 = suporte.calculaId(cartasSequencia.get(4));
+				valorCart5 = suporte.calculaId(cartasSequencia.get(5));
+
+				c1 = cartasSequencia.get(1);
+				c2 = cartasSequencia.get(2);
+				c3 = cartasSequencia.get(3);
+				c4 = cartasSequencia.get(4);
+				c5 = cartasSequencia.get(5);
 
 				if (cart1 == cart2 && cart2 == cart3 && cart3 == cart4 && cart4 == cart5
 						&& ((valorCart1 + 1) == valorCart2) && ((valorCart2 + 1) == valorCart3)
 						&& ((valorCart3 + 1) == valorCart4) && (valorCart4 + 1) == valorCart5) {
-					return true;
+					if (suporte.temCartaPlayer(player, c1, c2, c3, c4, c5)) {
+						return true;
+					}
 				} else {
-					cart1 = cartasSequencia.get(0 + 2).getNaipe();
-					cart2 = cartasSequencia.get(1 + 2).getNaipe();
-					cart3 = cartasSequencia.get(2 + 2).getNaipe();
-					cart4 = cartasSequencia.get(3 + 2).getNaipe();
-					cart5 = cartasSequencia.get(4 + 2).getNaipe();
+					cart1 = cartasSequencia.get(2).getNaipe();
+					cart2 = cartasSequencia.get(3).getNaipe();
+					cart3 = cartasSequencia.get(4).getNaipe();
+					cart4 = cartasSequencia.get(5).getNaipe();
+					cart5 = cartasSequencia.get(6).getNaipe();
 
-					valorCart1 = suporte.calculaId(cartasSequencia.get(0 + 2));
-					valorCart2 = suporte.calculaId(cartasSequencia.get(1 + 2));
-					valorCart3 = suporte.calculaId(cartasSequencia.get(2 + 2));
-					valorCart4 = suporte.calculaId(cartasSequencia.get(3 + 2));
-					valorCart5 = suporte.calculaId(cartasSequencia.get(4 + 2));
+					valorCart1 = suporte.calculaId(cartasSequencia.get(2));
+					valorCart2 = suporte.calculaId(cartasSequencia.get(3));
+					valorCart3 = suporte.calculaId(cartasSequencia.get(4));
+					valorCart4 = suporte.calculaId(cartasSequencia.get(5));
+					valorCart5 = suporte.calculaId(cartasSequencia.get(6));
+
+					c1 = cartasSequencia.get(2);
+					c2 = cartasSequencia.get(3);
+					c3 = cartasSequencia.get(4);
+					c4 = cartasSequencia.get(5);
+					c5 = cartasSequencia.get(6);
 
 					if (cart1 == cart2 && cart2 == cart3 && cart3 == cart4 && cart4 == cart5
 							&& ((valorCart1 + 1) == valorCart2) && ((valorCart2 + 1) == valorCart3)
 							&& ((valorCart3 + 1) == valorCart4) && (valorCart4 + 1) == valorCart5) {
-						return true;
-					} else {
-						return false;
+						if (suporte.temCartaPlayer(player, c1, c2, c3, c4, c5)) {
+							return true;
+						}
 					}
-
 				}
 			}
 		} catch (Exception e) {
 			return false;
 		}
+		return false;
 	}
 }

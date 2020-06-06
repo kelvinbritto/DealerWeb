@@ -16,7 +16,7 @@ public class BarralhoController {
 	@RequestMapping("/cartaaleatoria")
 	public ModelAndView cartaAleatoria() {
 		try {
-			Carta carta = baralho.AleatoriaCarta();
+			Carta carta = baralho.cartaAleatoria();
 			ModelAndView modelAndView = new ModelAndView("cartaaleatoria");
 			modelAndView.addObject("cartaAleatoria", carta);
 			modelAndView.addObject("quantidadeCartas", baralho.quantidade());
