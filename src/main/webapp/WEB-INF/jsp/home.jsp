@@ -23,6 +23,8 @@
 	</header>
 	<main>
 
+	<p>O </p>
+
 
 		<h2 class="titulo">Web Dealer</h2>
 		<table class="tabela-resultado">
@@ -34,7 +36,6 @@
 					</td>
 				</c:forEach>
 			</tr>
-
 		</table>
 
 		<table class="tabelajogador">

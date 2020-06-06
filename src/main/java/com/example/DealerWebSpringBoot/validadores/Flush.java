@@ -18,7 +18,6 @@ public class Flush {
 
 		cartas.add(player.getCarta1());
 		cartas.add(player.getCarta2());
-
 		cartas.addAll(cartasComunitarias);
 
 		cartas.sort(Comparator.comparing(carta -> suporte.getNaipeCarta(carta)));
@@ -36,7 +35,7 @@ public class Flush {
 			cartasSequencia.add(carta3);
 			cartasSequencia.add(carta4);
 			cartasSequencia.add(carta5);
-			if (cartasSequencia.contains(player.getCarta1()) || cartas.contains(player.getCarta2())) {
+			if (suporte.temCartaPlayer(player, carta1, carta2, carta3, carta4, carta5)) {
 				return true;
 			}
 		} else {
@@ -52,7 +51,7 @@ public class Flush {
 				cartasSequencia.add(carta3);
 				cartasSequencia.add(carta4);
 				cartasSequencia.add(carta5);
-				if (cartasSequencia.contains(player.getCarta1()) || cartas.contains(player.getCarta2())) {
+				if (suporte.temCartaPlayer(player, carta1, carta2, carta3, carta4, carta5)) {
 					return true;
 				}
 			} else {
@@ -68,7 +67,7 @@ public class Flush {
 					cartasSequencia.add(carta3);
 					cartasSequencia.add(carta4);
 					cartasSequencia.add(carta5);
-					if (cartasSequencia.contains(player.getCarta1()) || cartas.contains(player.getCarta2())) {
+					if (suporte.temCartaPlayer(player, carta1, carta2, carta3, carta4, carta5)) {
 						return true;
 					}
 				}
@@ -76,5 +75,4 @@ public class Flush {
 		}
 		return false;
 	}
-
 }

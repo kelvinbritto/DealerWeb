@@ -2,10 +2,12 @@ package com.example.DealerWebSpringBoot.controllers;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.DealerWebSpringBoot.models.Carta;
@@ -14,6 +16,7 @@ import com.example.DealerWebSpringBoot.models.Player;
 
 @RequestMapping("/mesa")
 @Controller
+@Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class MesaController {
 
 	private Mesa mesa = new Mesa();
@@ -90,7 +93,8 @@ public class MesaController {
 		Carta cartaEscolida1 = mesa.selecionaCartaId(carta1);
 		Carta cartaEscolida2 = mesa.selecionaCartaId(carta2);
 
-		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) || cartaEscolida1 == null || cartaEscolida2 == null) {
+		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) 
+				|| cartaEscolida1 == null || cartaEscolida2 == null) {
 			return new ModelAndView("redirect:/mesa/formulario");
 		}
 
@@ -106,10 +110,13 @@ public class MesaController {
 
 	@RequestMapping("/formcomunitarias")
 	public ModelAndView comunitarias() {
-		ModelAndView modelAndView = new ModelAndView("formcomunitarias");
-		List<Carta> cartasBaralho = mesa.listarBaralho();
-		modelAndView.addObject("cartasBaralho", cartasBaralho);
-		return modelAndView;
+		if(mesa.getPlayers().size() > 1) {
+			ModelAndView modelAndView = new ModelAndView("formcomunitarias");
+			List<Carta> cartasBaralho = mesa.listarBaralho();
+			modelAndView.addObject("cartasBaralho", cartasBaralho);
+			return modelAndView;			
+		}
+			return new ModelAndView("redirect:/mesa/formulario");
 	}
 
 	@RequestMapping(value = "/gravarcomunitarias", method = RequestMethod.POST)
