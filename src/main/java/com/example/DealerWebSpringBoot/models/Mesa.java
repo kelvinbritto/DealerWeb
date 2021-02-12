@@ -3,6 +3,8 @@ package com.example.DealerWebSpringBoot.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.example.DealerWebSpringBoot.validadores.Validadora;
 
 public class Mesa {
@@ -10,9 +12,13 @@ public class Mesa {
 	private boolean flop = false;
 	private boolean turn = false;
 	private boolean river = false;
+	private boolean resultado = false;
 
 	private List<Player> jogadores = new ArrayList<Player>();
+
 	private List<Carta> cartasComunitarias = new ArrayList<Carta>();
+	
+	private List<List> resultadoLista = new ArrayList<List>();
 
 	private Baralho baralho = new Baralho();
 
@@ -48,64 +54,69 @@ public class Mesa {
 		return null;
 	}
 
-	public List<Carta> flop() {
+	public ResponseEntity<List<Carta>> flop() {
+
+//		if (jogadores.size() == 0) {
+//			return ResponseEntity.badRequest().build();
+//		}
 
 		if (flop) {
-			return cartasComunitarias;
+			return ResponseEntity.ok(getComunitarias());
 		}
-		flop = true;
-		cartasComunitarias.add(baralho.cartaAleatoria());
-		cartasComunitarias.add(baralho.cartaAleatoria());
-		cartasComunitarias.add(baralho.cartaAleatoria());
 
-		return cartasComunitarias;
+		cartasComunitarias.add(baralho.cartaAleatoria());
+		cartasComunitarias.add(baralho.cartaAleatoria());
+		cartasComunitarias.add(baralho.cartaAleatoria());
+		flop = true;
+
+		return ResponseEntity.ok(getComunitarias());
 	}
 
-	public List<Carta> turn() {
+	public ResponseEntity<List<Carta>> turn() {
+
+//		if (jogadores.size() == 0) {
+//			return ResponseEntity.badRequest().build();
+//		}
 
 		if (turn) {
-			return cartasComunitarias;
+			return ResponseEntity.ok(getComunitarias());
 		}
-		turn = true;
 		cartasComunitarias.add(baralho.cartaAleatoria());
+		turn = true;
 
-		return cartasComunitarias;
+		return ResponseEntity.ok(getComunitarias());
 	}
 
-	public List<Carta> river() {
+	public ResponseEntity<List<Carta>> river() {
+
+//		if (jogadores.size() == 0) {
+//			return ResponseEntity.badRequest().build();
+//		}
+
 		if (river) {
-			return cartasComunitarias;
+			return ResponseEntity.ok(getComunitarias());
 		}
+		cartasComunitarias.add(baralho.cartaAleatoria());
 		river = true;
 
-		cartasComunitarias.add(baralho.cartaAleatoria());
-
-		return cartasComunitarias;
+		return ResponseEntity.ok(getComunitarias());
 	}
 
-	public void geraResultado() {
-		Validadora validadora = new Validadora();
-		jogadores.forEach(player -> player.setResultado(validadora.valida(player, cartasComunitarias)));
-	}
-
-	public Carta getCarta1() {
-		return cartasComunitarias.get(0);
-	}
-
-	public Carta getCarta2() {
-		return cartasComunitarias.get(1);
-	}
-
-	public Carta getCarta3() {
-		return cartasComunitarias.get(2);
-	}
-
-	public Carta getCarta4() {
-		return cartasComunitarias.get(3);
-	}
-
-	public Carta getCarta5() {
-		return cartasComunitarias.get(4);
+	public List<List> geraResultado() {
+			
+		if(resultado == false) {
+			
+			resultado = true;
+			
+			jogadores.forEach(player -> player.setResultado(new Validadora().valida(player, cartasComunitarias)));
+			
+			resultadoLista.add(this.cartasComunitarias);
+			resultadoLista.add(this.jogadores);			
+			
+			return resultadoLista;
+		}
+		
+		return resultadoLista;
 	}
 
 	public void gravarPlayer(Player player) {
@@ -113,26 +124,16 @@ public class Mesa {
 	}
 
 	public List<Player> getPlayers() {
-		return jogadores;
+		List<Player> players = new ArrayList<Player>();
+		players.addAll(jogadores);
+		return players;
 	}
 
 	public boolean getValidaEntregaResultado() {
-		if (flop && turn && river) {
+		if (flop && turn && river && jogadores.size() > 0) {
 			return true;
 		}
 		return false;
-	}
-
-	public void forcaComunitarias() {
-		cartasComunitarias.add(baralho.selecionaCartaId(35));
-		cartasComunitarias.add(baralho.selecionaCartaId(6));
-		cartasComunitarias.add(baralho.selecionaCartaId(12));
-		cartasComunitarias.add(baralho.selecionaCartaId(13));
-		cartasComunitarias.add(baralho.selecionaCartaId(50));
-
-		flop = true;
-		turn = true;
-		river = true;
 	}
 
 	public List<Carta> getComunitarias() {
@@ -141,7 +142,7 @@ public class Mesa {
 		return cartas;
 	}
 
-	public List<Carta> listarBaralho() {
+	public List<Carta> listarBaralhoCompleto() {
 		return baralho.listaBaralhoFixo();
 	}
 
@@ -159,6 +160,10 @@ public class Mesa {
 
 	public Carta cartaAleatoria() {
 		return baralho.cartaAleatoria();
+	}
+
+	public Carta selecionaCartaNome(String numero, String naipe) {
+		return baralho.selecionaCarta(numero, naipe);
 	}
 
 }

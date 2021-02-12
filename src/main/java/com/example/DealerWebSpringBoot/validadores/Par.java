@@ -11,7 +11,8 @@ public class Par {
 
 		for (Carta carta : cartasComunitarias) {
 			if (carta.getNumero() == player.getCarta1().getNumero()
-					|| carta.getNumero() == player.getCarta2().getNumero()) {
+					|| carta.getNumero() == player.getCarta2().getNumero()
+					|| player.getCarta1().getNumero() == player.getCarta2().getNumero()) {
 				return true;
 			}
 		}

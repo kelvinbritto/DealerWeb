@@ -3,136 +3,101 @@ package com.example.DealerWebSpringBoot.controllers;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.DealerWebSpringBoot.models.Carta;
 import com.example.DealerWebSpringBoot.models.Mesa;
 import com.example.DealerWebSpringBoot.models.Player;
+import com.example.DealerWebSpringBoot.models.form.ComunitariasForm;
+import com.example.DealerWebSpringBoot.models.form.PlayerForm;
 
 @RequestMapping("/mesa")
-@Controller
+@RestController
 @Scope(value = WebApplicationContext.SCOPE_SESSION)
 public class MesaController {
 
 	private Mesa mesa = new Mesa();
 
-	@GetMapping
-	public ModelAndView mesa() {
-		ModelAndView modelAndView = new ModelAndView("mesa");
-		modelAndView.addObject("flop", null);
-		return modelAndView;
-	}
-
 	@RequestMapping("/flop")
-	public ModelAndView flop() {
-		ModelAndView modelAndView = new ModelAndView("mesa");
-		List<Carta> cartasComunitarias = mesa.flop();
-		modelAndView.addObject("cartasComunitarias", cartasComunitarias);
-
-		return modelAndView;
+	public ResponseEntity<List<Carta>> flop() {
+		
+		ResponseEntity<List<Carta>> cartasComunitarias = mesa.flop();
+		return cartasComunitarias;
+	
 	}
 
 	@RequestMapping("/turn")
-	public ModelAndView turn() {
-
-		ModelAndView modelAndView = new ModelAndView("mesa");
-
-		List<Carta> cartasComunitarias = mesa.turn();
-		modelAndView.addObject("cartasComunitarias", cartasComunitarias);
-
-		return modelAndView;
-
+	public ResponseEntity<List<Carta>> turn() {
+		ResponseEntity<List<Carta>> cartasComunitarias = mesa.turn();
+		return cartasComunitarias;
 	}
 
 	@RequestMapping("/river")
-	public ModelAndView river() {
-		ModelAndView modelAndView = new ModelAndView("mesa");
-		List<Carta> cartasComunitarias = mesa.river();
-		modelAndView.addObject("cartasComunitarias", cartasComunitarias);
-
-		return modelAndView;
+	public ResponseEntity<List<Carta>> river() {
+		ResponseEntity<List<Carta>> cartasComunitarias = mesa.river();
+		
+		return cartasComunitarias;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@RequestMapping("/resultado")
-	public ModelAndView resultado() {
-
+	public ResponseEntity<List<List>> resultado() {
+		
+		
 		if (mesa.getValidaEntregaResultado()) {
 
-			ModelAndView modelAndView = new ModelAndView("resultado");
-
-			mesa.geraResultado();
-			List<Carta> cartasComunitarias = mesa.river();
-			List<Player> jogadores = mesa.getPlayers();
-
-			modelAndView.addObject("cartasComunitarias", cartasComunitarias);
-			modelAndView.addObject("players", jogadores);
-
-			return modelAndView;
+			List<List> listas = mesa.geraResultado();
+			
+			return ResponseEntity.ok(listas);
 		}
 
-		return new ModelAndView("redirect:/mesa/flop");
+		return ResponseEntity.badRequest().build();
 	}
 
-	@RequestMapping("/formulario")
-	public ModelAndView novo() {
-		ModelAndView modelAndView = new ModelAndView("/formplayer");
-		List<Carta> cartasBaralho = mesa.listarBaralho();
-		modelAndView.addObject("cartasBaralho", cartasBaralho);
-		modelAndView.addObject("jogadores", mesa.getPlayers());
-		return modelAndView;
-	}
+	@RequestMapping(value = "/gravar", method = RequestMethod.POST)
+	public ResponseEntity<String> gravar(@RequestBody PlayerForm form, UriComponentsBuilder uriBuilder) {
+		
+		Carta cartaEscolida1 = mesa.selecionaCartaId(form.getCarta1());
+		Carta cartaEscolida2 = mesa.selecionaCartaId(form.getCarta2());
 
-	@RequestMapping(value = "/grava", method = RequestMethod.POST)
-	public ModelAndView grava(String nome, Integer carta1, Integer carta2) {
-
-		Carta cartaEscolida1 = mesa.selecionaCartaId(carta1);
-		Carta cartaEscolida2 = mesa.selecionaCartaId(carta2);
-
-		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) 
-				|| cartaEscolida1 == null || cartaEscolida2 == null) {
-			return new ModelAndView("redirect:/mesa/formulario");
+		if (mesa.testaIguais(cartaEscolida1, cartaEscolida2) || cartaEscolida1 == null || cartaEscolida2 == null) {
+			return ResponseEntity.badRequest().body("Dados Inválidos");
 		}
 
 		mesa.removeCarta(cartaEscolida1);
 		mesa.removeCarta(cartaEscolida2);
 
-		Player player = new Player(nome, cartaEscolida1, cartaEscolida2);
-
+		Player player = form.converter(cartaEscolida1, cartaEscolida2);
 		mesa.gravarPlayer(player);
-
-		return new ModelAndView("redirect:/mesa/formulario");
-	}
-
-	@RequestMapping("/formcomunitarias")
-	public ModelAndView comunitarias() {
-		if(mesa.getPlayers().size() > 1) {
-			ModelAndView modelAndView = new ModelAndView("formcomunitarias");
-			List<Carta> cartasBaralho = mesa.listarBaralho();
-			modelAndView.addObject("cartasBaralho", cartasBaralho);
-			return modelAndView;			
-		}
-			return new ModelAndView("redirect:/mesa/formulario");
+		
+		return ResponseEntity.ok(player.getNome());
 	}
 
 	@RequestMapping(value = "/gravarcomunitarias", method = RequestMethod.POST)
-	public ModelAndView selecionaComunitarias(Integer carta1, Integer carta2, Integer carta3, Integer carta4,
-			Integer carta5) {
+	public ResponseEntity<List<Carta>> selecionaComunitarias(@RequestBody ComunitariasForm form) {
 
-		if (mesa.comunitariasManual(carta1, carta2, carta3, carta4, carta5) != null) {
-			return new ModelAndView("redirect:/mesa/resultado");
+		if (mesa.comunitariasManual(form.getCarta1(), form.getCarta2(), form.getCarta3(), form.getCarta4(),
+				form.getCarta5()) != null) {
+			return ResponseEntity.ok(mesa.getComunitarias());
 		}
-		return new ModelAndView("redirect:/mesa/formcomunitarias");
+		return ResponseEntity.badRequest().build();
 	}
-
+ 
 	@RequestMapping("/resetajogo")
-	public ModelAndView resetajogo() {
+	public ResponseEntity<String> resetajogo() {
 		this.mesa = new Mesa();
-		return new ModelAndView("redirect:/mesa/formulario");
+		return ResponseEntity.ok("Baralho Resetado");
+	}
+	
+	@RequestMapping("/baralhocompleto")
+	public ResponseEntity<List<Carta>> cartas(){
+		return ResponseEntity.ok(mesa.listarBaralhoCompleto());
 	}
 
 }

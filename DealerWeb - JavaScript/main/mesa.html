@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Mesa - Dealer Web</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="caixa">
+            <img id="logo" class="logo" alt="cartas" src="resources/imagens/logo1.png">
+        </div>
+    </header>
+        <main>
+            <h2 class="titulo">Web Dealer</h2>
+            <h3 class="sub-titulo"></h3>
+            <table id="tabela-resultado">
+                <tr id="trCartas">
+                    <td><img src="resources/cartas/0.png" class="imagem-carta" id="imagem-carta1"></td>
+                    <td><img src="resources/cartas/0.png" class="imagem-carta" id="imagem-carta2"></td>
+                    <td><img src="resources/cartas/0.png" class="imagem-carta" id="imagem-carta3"></td>
+                    <td><img src="resources/cartas/0.png" class="imagem-carta" id="imagem-carta4"></td>
+                    <td><img src="resources/cartas/0.png" class="imagem-carta" id="imagem-carta5"></td>
+
+                </tr>
+			</table>
+			<div class="botoes">
+				<button id="flop-botao" class="botoes-padrao">FLOP</button>
+				<button id="turn-botao" class="botoes-padrao">TURN</button>
+				<button id="river-botao" class="botoes-padrao">RIVER</button>
+			</div>
+            <a href="resultado.html"><button id="resultado-botao" >RESULTADO</button></a>
+
+            <button id="novo-jogo">NOVO JOGO</button>			
+		</main>
+
+		<script src="resources/js/mesa.js"></script>
+    </body>
+
+</html>

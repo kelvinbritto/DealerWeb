@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Selecione Suas Cartas - Dealer Web</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="caixa">
+            <img id="logo" class="logo" alt="cartas" src="resources/imagens/logo1.png">
+        </div>
+    </header>
+    <main>
+        <h2 class="titulo">Selecione Suas Cartas</h2>
+        <form id="form-player">
+
+            <label>Seu Nome</label>
+            <input type="text" name="nome" class="input-nome" required="required" />
+
+            <p>Primeira Carta:</p>
+            <select name="carta1" class="input-padrao" id="selection1">
+            </select>
+
+            <p>Segunda Carta:</p>
+            <select name="carta2" class="input-padrao" id="selection2">
+            </select>
+
+            <button class="enviar" id="botao-pronto" style="width: 30%; display: block;">Pronto!</button>
+        </form>
+
+        <div class="jogador-tabela">
+            <table class="tabela-player">
+                <thead>
+                    <tr>
+                        <th style="padding: 6px 0;">Jogadores</th>
+                    </tr>
+                </thead>
+
+                <tbody id="player-table">
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+        <a href="mesa.html"><button class="enviar" id="comecar-automatico" >Começar o Jogo Automatico</button></a>
+
+        <button class="enviar" id="comecar-manual">Selecionar Comunitarias</button>
+
+    </main>
+
+    <script type="text/javascript" src="resources/js/baralhocompleto.js"></script>
+    <script type="text/javascript" src="resources/js/mesa.js"></script>
+    <script type="text/javascript" src="resources/js/form.js"></script>
+
+
+</body>
+
+</html>

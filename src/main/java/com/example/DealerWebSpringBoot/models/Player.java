@@ -8,7 +8,6 @@ public class Player {
 	private String resultado;
 	
 	public Player() {
-
 	}
 
 	public Player(String nome, Carta carta1, Carta carta2) {
@@ -20,13 +19,6 @@ public class Player {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-//	@Override
-//	public String toString() {
-//		
-//		return "Jogador " + this.nome + " Carta1 = " + this.carta1.getNome() + " e " + 
-//				"Carta2 = " + this.carta2.getNome();
-//	}
 
 	public String getNome() {
 		return nome;
